@@ -1,5 +1,6 @@
 package com.example.googlesignin;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +9,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.googlesignin.Adapter.RestaurntDataAdapter;
 import com.bumptech.glide.Glide;
+import com.example.googlesignin.Event.ResturantDataEvent;
+import com.example.googlesignin.Mananger.ResturantMananger;
+import com.example.googlesignin.Model.RestaurantDataModel;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -19,13 +24,18 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import de.greenrobot.event.EventBus;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
-
+    private Context mAppContext;
     private LinearLayout Prof_section;
     private Button SignOUt;
     private SignInButton SignIn;
@@ -34,10 +44,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GoogleApiClient googleApiClient;
     private static final int REQ_CODE = 9001;
 
+    RecyclerView resaurantDataRecycler;
+    RestaurntDataAdapter restaurntDataAdapter;
+    public static List<RestaurantDataModel> restaurantDataModels;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
+
+        EventBus.getDefault().register( this );
         Prof_section = findViewById( R.id.prof_selection );
         SignOUt = findViewById( R.id.btn_logout );
         SignIn = findViewById( R.id.btn_login );
@@ -50,10 +67,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+        resaurantDataRecycler = findViewById( R.id.restaurant_recycler );
+
+        mAppContext = getApplicationContext();
+        PMAppSession.getInstance( mAppContext, new AppConfig( mAppContext ) );
+        ResturantMananger.getInstance().restaurntData();
+
+
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder( GoogleSignInOptions.DEFAULT_SIGN_IN ).requestEmail().build();
 
         googleApiClient = new GoogleApiClient.Builder( this ).enableAutoManage( this, this ).addApi( Auth.GOOGLE_SIGN_IN_API, signInOptions ).build();
     }
+
+    public void onEvent(ResturantDataEvent resturantDataEvent) {
+        restaurantDataModels= resturantDataEvent.getRestaurantDataModelList();
+        resaurantDataRecycler.setHasFixedSize( true );
+        resaurantDataRecycler.setLayoutManager( new LinearLayoutManager( getApplicationContext() ) );
+        restaurntDataAdapter =  new RestaurntDataAdapter( getApplicationContext(),restaurantDataModels);
+        resaurantDataRecycler.setAdapter(restaurntDataAdapter);
+
+
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -99,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             GoogleSignInAccount account = result.getSignInAccount();
             String name = account.getDisplayName();
             String email = account.getEmail();
-        String img_url = account.getPhotoUrl().toString();
+            String img_url = account.getPhotoUrl().toString();
 
             Name.setText( name );
             Email.setText( email );

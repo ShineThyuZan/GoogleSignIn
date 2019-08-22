@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_req"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:cardBackgroundColor="#E9F0AF"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    app:srcCompat="@mipmap/spiderman" />
+
+                <TextView
+                    android:id="@+id/line1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/photo"
+                    android:text="Job Number :"
+
+                    />
+
+                <TextView
+                    android:id="@+id/jobno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:layout_toRightOf="@id/line1"
+                    android:layout_marginLeft="5dp"
+                    android:text="hobno"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/line2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line1"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/photo"
+                    android:text="Company :"
+
+                    />
+
+                <TextView
+                    android:id="@+id/company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:layout_toRightOf="@id/line2"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_below="@id/jobno"
+                    android:text="company"
+                 android:textColor="#000000"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/line3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line2"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/photo"
+                    android:text="Address :"
+
+                    />
+
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/company"
+                    android:layout_marginTop="16dp"
+                    android:layout_toRightOf="@+id/line3"
+                    android:layout_marginLeft="5dp"
+                    android:text="Address"
+                    android:textSize="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/line3"
+                    android:layout_marginTop="0dp"
+                    android:layout_toRightOf="@id/photo"
+                   android:layout_marginLeft="150dp"
+                    android:layout_marginBottom="5dp"
+           >
+
+                    <Button
+                        android:id="@+id/accept"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/tv_reqLocation"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/photo"
+                        android:background="@color/colorAccent"
+                        android:text="Accept"
+                        android:enabled="true"
+                        android:textAllCaps="false"
+                        android:paddingBottom="13dp"
+                       />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>>
+
+</RelativeLayout>

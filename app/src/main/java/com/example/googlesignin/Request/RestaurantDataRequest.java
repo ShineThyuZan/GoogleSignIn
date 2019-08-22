@@ -1,5 +1,7 @@
 package com.example.googlesignin.Request;
 
+import android.util.Log;
+
 import com.example.googlesignin.Interface.RestaurntDataInterface;
 import com.example.googlesignin.Model.RestaurantDataModel;
 import com.example.googlesignin.network.RequestBuilder;
@@ -15,7 +17,6 @@ public class RestaurantDataRequest implements Callback<List<RestaurantDataModel>
 
     RestaurantDataDelegate mDelegate;
     RestaurntDataInterface restaurntDataInterface;
-  //  String restrauntData = ResturantMananger.restaurantData;
 
 
     public RestaurantDataRequest(RestaurantDataDelegate delegate) {
@@ -26,7 +27,10 @@ public class RestaurantDataRequest implements Callback<List<RestaurantDataModel>
     public void onResponse(Call<List<RestaurantDataModel>> call, Response<List<RestaurantDataModel>> response) {
         List<RestaurantDataModel> restaurantDataModels = response.body();
 
+
+        Log.d( "response ", String.valueOf( restaurantDataModels ) );
         if (response.isSuccessful()) {
+            mDelegate.restaurntDataSuccess( restaurantDataModels );
 
         }
     }
@@ -40,13 +44,13 @@ public class RestaurantDataRequest implements Callback<List<RestaurantDataModel>
     public void start(String baseUrl) {
         restaurntDataInterface = RequestBuilder.createService( RestaurntDataInterface.class, baseUrl );
 
-        Call call = restaurntDataInterface.getRestaurantData(  );
+        Call call = restaurntDataInterface.getRestaurantData();
 
 
         call.enqueue( this );
     }
 
     public interface RestaurantDataDelegate {
-        void searchSuccess(List<RestaurantDataModel> saleItemResponse);
+        void restaurntDataSuccess(List<RestaurantDataModel> restaurantDataModels);
     }
 }

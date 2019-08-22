@@ -42,23 +42,26 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="Logout" />
-    </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/Relative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler"
+        <RelativeLayout
+            android:id="@+id/visible_Relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="8dp"
-            android:scrollbars="none" />
+            android:visibility="visible">
 
-    </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/restaurant_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="8dp"
+                android:scrollbars="none" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
 
 
     <com.google.android.gms.common.SignInButton

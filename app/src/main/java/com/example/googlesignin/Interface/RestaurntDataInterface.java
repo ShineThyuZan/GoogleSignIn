@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 
 public interface RestaurntDataInterface {
 
-    @GET("https://api.myjson.com/bins/8d195.json")
+    @GET("8d195.json")
     Call<List<RestaurantDataModel>> getRestaurantData();
 }
