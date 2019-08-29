@@ -10,9 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.googlesignin.Adapter.RestaurntDataAdapter;
-import com.bumptech.glide.Glide;
 import com.example.googlesignin.Event.ResturantDataEvent;
 import com.example.googlesignin.Mananger.ResturantMananger;
+import com.example.googlesignin.Model.DegreeDataModel;
 import com.example.googlesignin.Model.RestaurantDataModel;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView resaurantDataRecycler;
     RestaurntDataAdapter restaurntDataAdapter;
     public static List<RestaurantDataModel> restaurantDataModels;
+    public static List<DegreeDataModel> degreeDataModels;
 
 
     @Override
@@ -65,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SignOUt.setOnClickListener( this );
         Prof_section.setVisibility( View.GONE );
 
-
-
         resaurantDataRecycler = findViewById( R.id.restaurant_recycler );
 
         mAppContext = getApplicationContext();
@@ -80,11 +79,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onEvent(ResturantDataEvent resturantDataEvent) {
-        restaurantDataModels= resturantDataEvent.getRestaurantDataModelList();
+
+
+        restaurantDataModels = resturantDataEvent.getRestaurantDataModelList();
         resaurantDataRecycler.setHasFixedSize( true );
         resaurantDataRecycler.setLayoutManager( new LinearLayoutManager( getApplicationContext() ) );
-        restaurntDataAdapter =  new RestaurntDataAdapter( getApplicationContext(),restaurantDataModels);
-        resaurantDataRecycler.setAdapter(restaurntDataAdapter);
+        restaurntDataAdapter = new RestaurntDataAdapter( getApplicationContext(), restaurantDataModels, degreeDataModels );
+        resaurantDataRecycler.setAdapter( restaurntDataAdapter );
 
 
     }
@@ -134,11 +135,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             GoogleSignInAccount account = result.getSignInAccount();
             String name = account.getDisplayName();
             String email = account.getEmail();
-            String img_url = account.getPhotoUrl().toString();
+            //   String spider = "https://www.google.com/search?q=spiderman&tbm=isch&source=iu&ictx=1&fir=wEyNlPzHnzwvIM%253A%252CtQYLjkUHejOAvM%252C%252Fm%252F06ys2&vet=1&usg=AI4_-kQat7uzu5Byo0cAya__6KCL368hVA&sa=X&ved=2ahUKEwjWzunvlafkAhVPknAKHZ6GCMUQ_B0wIHoECAkQAw#imgrc=wEyNlPzHnzwvIM:";
+
+            //  String img_url =( account.getPhotoUrl().toString() );
+
 
             Name.setText( name );
             Email.setText( email );
-            Glide.with( this ).load( img_url ).into( porf_pic );
+            // Glide.with( this ).load( img_url ).into( porf_pic );
             updateUI( true );
 
 

@@ -20,4 +20,9 @@ public class DegreeDataModel {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+
+    public DegreeDataModel(String latitude, String longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
