@@ -53,7 +53,7 @@ public class RestaurntDataAdapter extends RecyclerView.Adapter<RestaurntDataAdap
             @Override
             public void onClick(View v) {
                 Intent i = new Intent( context, GetRestaurantLocationDataActivity.class );
-                i.putExtra( "name", restaurantDataModelList.get( position ).getCompany() );
+                i.putExtra( "adr", restaurantDataModelList.get( position ).getAddress() );
 //                i.putExtra( "longi", restaurantDataModelList.get( position ).getDegreeDataModel().getLongitude() );
               //  i.putExtra( "lati", restaurantDataModelList.get( position ).getDegreeDataModel().getLatitude() );
                 i.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
